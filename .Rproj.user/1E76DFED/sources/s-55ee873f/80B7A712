@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536389732713.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "80B7A712",
+    "lastKnownWriteTime" : 1536389257,
+    "last_content_update" : 1536389257,
+    "path" : "~/Documents/bioinformatics/RNASeqWorkflowData/inst/extdata/input_files/Saccharomyces_cerevisiae_XV_Ensembl.gtf",
+    "project_path" : "inst/extdata/input_files/Saccharomyces_cerevisiae_XV_Ensembl.gtf",
+    "properties" : {
+        "cursorPosition" : "26,174",
+        "scrollLine" : "24"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}
