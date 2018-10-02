@@ -1,7 +1,7 @@
 Package: RNASeqRData
 Type: Package
 Title: RNASeqRData: sample data for RNASeqR software package demonstration
-Version: 0.99.0
+Version: 0.99.1
 Author: Kuan-Hao Chao
 Maintainer: Kuan-Hao Chao <ntueeb05howard@gmail.com>
 biocViews: ExperimentData, Genetics, Infrastructure, DataImport, Sequencing, 
