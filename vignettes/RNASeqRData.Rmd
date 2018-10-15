@@ -54,7 +54,7 @@ knitr::opts_chunk$set(tidy = FALSE,
 ```{r fig.width=10, echo=FALSE}
 library(png)
 library(grid)
-img <- readPNG("figure/input_files_structure.png")
+img <- readPNG("./input_files_structure.png")
 grid.raster(img, just = "center")
 ```
 
