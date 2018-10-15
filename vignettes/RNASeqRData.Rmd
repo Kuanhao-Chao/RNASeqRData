@@ -11,7 +11,7 @@ output:
 #bibliography: bibliography.bib
 fontsize: 14pt
 vignette: >
-  %\VignetteIndexEntry{RNA-Seq workflow for one independent variable analysis}
+  %\VignetteIndexEntry{RNASeqR vignette sample data explanation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteDepends{}
   %\VignetteEncoding{UTF-8}
@@ -27,7 +27,7 @@ knitr::opts_chunk$set(tidy = FALSE,
 
 # Introduction
 
-[RNASeqRData](https://github.com/HowardChao/RNASeqRData) is a helper package for vignette in [RNASeqR](https://github.com/HowardChao/RNASeqR). This vignette shows the criteria of `input_files` and extraction process of mini data.
+[RNASeqRData](https://github.com/HowardChao/RNASeqRData) is a helper package for vignette in [RNASeqR](https://github.com/HowardChao/RNASeqR) software package. This vignette shows the criteria of `input_files` and extraction process of mini example data.
 
 # `input_files` criteria
 `input.path.prefix` is the parameter that stores the directory location of *'input_files/'*. Users have to prepare an *'input_file/'* before running RNASeqR package workflow. The criteria of *'input_file/'* are listed below:

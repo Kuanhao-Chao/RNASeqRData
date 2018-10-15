@@ -1,13 +1,13 @@
 Package: RNASeqRData
 Type: Package
 Title: RNASeqRData: sample data for RNASeqR software package demonstration
-Version: 0.99.6
+Version: 0.99.7
 Author: Kuan-Hao Chao
 Maintainer: Kuan-Hao Chao <ntueeb05howard@gmail.com>
 biocViews: ExperimentData, Saccharomyces_cerevisiae_Data
 Description: RNASeqRData is a helper experiment package for vignette 
              demonstration purpose in RNASeqR software package.
-Suggests: png
+Suggests: png, grid
 Depends: R (>= 3.5.0)
 License: Artistic-2.0
 Encoding: UTF-8
