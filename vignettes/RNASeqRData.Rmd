@@ -1,0 +1,98 @@
+---
+title: "RNASeqRData : RNASeqR vignette sample data explanation"
+author: "Author: Kuan-Hao Chao (ntueeb05howard@gmail.com)"
+date: "Last update: `r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  BiocStyle::html_document:
+    highlight: pygments
+    toc: true
+    toc_depth: 3
+    fig_caption: yes
+#bibliography: bibliography.bib
+fontsize: 14pt
+vignette: >
+  %\VignetteIndexEntry{RNA-Seq workflow for one independent variable analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{}
+  %\VignetteEncoding{UTF-8}
+  %\usepackage[utf8]{inputenc}
+  %\VignettePackage{RNASeqR}
+---
+
+```{r style, echo=FALSE, results="asis", message=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+# Introduction
+
+[RNASeqRData](https://github.com/HowardChao/RNASeqRData) is a helper package for vignette in [RNASeqR](https://github.com/HowardChao/RNASeqR). This vignette shows the criteria of `input_files` and extraction process of mini data.
+
+# `input_files` criteria
+`input.path.prefix` is the parameter that stores the directory location of *'input_files/'*. Users have to prepare an *'input_file/'* before running RNASeqR package workflow. The criteria of *'input_file/'* are listed below:
+
+* **`genome.name`.fa**: reference genome in FASTA file formation.
+
+* **`genome.name`.gtf**: gene annotation in GTF file formation.
+    
+* **raw_fastq.gz/**: directory storing `FASTQ` files. 
+    * Support paired-end reads files only.
+    
+    * Names of paired-end `FASTQ` files : '`sample.pattern`_1.fastq.gz' and '`sample.pattern`_2.fastq.gz'. `sample.pattern` must be distinct for each sample.
+    
+* **phenodata.csv**: information about RNA-Seq experiment design.
+    * First column : Distinct ids for each sample. Value of each sample of this column must match `sample.pattern` in `FASTQ` files in *'raw_fastq.gz/'*. Column names must be **ids**.
+    
+    * Second column : independent variable for the RNA-Seq experiment. Value of each sample of this column can only be parameter `case.group` and `control.group`. Column name is parameter `independent.variable`.
+        
+* **indices/** : directory storing `HT2` indices files for HISAT2 alignment tool.
+    * This directory is **optional**. `HT2` indices files corresponding to target reference genome can be installed at [HISAT2 official website](https://ccb.jhu.edu/software/hisat2/index.shtml). Providing `HT2` files can accelerate the subsequent steps. It is highly advised to install `HT2` files.
+    
+    * If `HT2` index files are not provided, *'input_files/indices/'* directory should be deleted.
+        
+```{r fig.width=10, echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("figure/input_files_structure.png")
+grid.raster(img, just = "center")
+```
+
+# Sample definition
+
+The data in this experiment data package is originated from [NCBI's Sequence Read Archive](http://www.ncbi.nlm.nih.gov/sra) for the entries SRR3396381, SRR3396382, SRR3396384, SRR3396385, SRR3396386, and SRR3396387. These samples were from *Saccharomyces cerevisiae*. To create mini data for demonstration purpose, reads aligned to the region from 0 to 100000 at chromosome XV were extracted. More details steps will be explained in the next chapter. Reference genome and gene annotation files, `Saccharomyces_cerevisiae_XV_Ensembl.fa` and `Saccharomyces_cerevisiae_XV_Ensembl.gtf`, are downloaded from iGenomes, Ensembl, R64-1-1.
+
+# Sample data preparation process
+
+* `fastq.gz` files:
+`fastq.gz` files are aligned and analyzed in advanced in order to reduce the size of large raw fastq.gz, which are about 800M, and to keep the most differential expressed genes as far as possible. Reads aligned to the region from 0 to 100000 at chromosome XV were extracted only. Therefore, the size of these `fastq.gz` would be reduced to only about 5M. The following are the data processing steps:
+
+1. SAMtools builds bam indexes of BAM files : 
+  * ex: `samtools index SRR3396381.bam`
+  
+2. SAMtools extracts reads in certain range : 
+  * ex: `samtools view -b SRR3396381.bam "XV:0-100000" > SRR3396381.extracted.bam`
+  
+3. SAMtools sorts extracted BAM files : 
+  * ex: `samtools sort -n SRR3396381.extracted.bam -o SRR3396381.sorted.bam`
+  
+4. SAMtools gets splited fastq files : 
+  * ex: `bedtools bamtofastq -i SRR3396381.sorted.bam -fq SRR3396381_XV_1.fastq -fq2 SRR3396381_XV_2.fastq`
+  
+5. gzip fastq files : 
+  * ex: `gzip SRR3396381_XV_1.fastq`
+
+Finally, mini data in this RNASeqRData package are created.
+
+* `Saccharomyces_cerevisiae_XV_Ensembl.fa`:
+Only XV chromosome sequence are extracted.
+
+* `Saccharomyces_cerevisiae_XV_Ensembl.gtf`:
+The whole *Saccharomyces cerevisiae* gtf annotation files.
+
+
+# Session Information
+```{r}
+sessionInfo()
+```
+
